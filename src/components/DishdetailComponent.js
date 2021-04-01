@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
-import { Card, CardImg, CardImgOverlay, CardText, CardBody,
+import { Card, CardImg, CardText, CardBody,
     CardTitle } from 'reactstrap';
 
 class DishDetail extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-        };
     }
 
     renderDish(selectedDish) {
@@ -27,6 +25,7 @@ class DishDetail extends Component {
     }
 
     renderComments(selectedDish) {
+        
         if (selectedDish != null) {
             const com = selectedDish.comments.map((comment) => {
                 return(
@@ -34,7 +33,7 @@ class DishDetail extends Component {
                         <ul className="list-unstyled" key={comment.id}>
                             <li>
                                 <p>{comment.comment}</p>
-                                <p>-- {comment.author} , {comment.date}</p>
+                                <p>-- {comment.author} , {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</p>
                             </li>
                         </ul>
                     </div>
@@ -49,18 +48,24 @@ class DishDetail extends Component {
     }
 
     render() {
-        return (
-            <div className="row">
-                <div  className="col-12 col-md-5 m-1">
-                    {this.renderDish(this.props.selectedDish)}
+        if (this.props.dish != null) {
+            return (
+                <div className="container">
+                    <div className="row">
+                        <div  className="col-12 col-md-5 m-1">
+                            {this.renderDish(this.props.dish)}
+                        </div>
+                        <div className="col col-md-5 m-1">
+                            <h4>Comments</h4>
+                            {this.renderComments(this.props.dish)}
+                        </div>
+                    </div>
                 </div>
-                <div className="col col-md-5 m-1">
-                    <h4>Comments</h4>
-                    {this.renderComments(this.props.selectedDish)}
-                </div>
-            </div>
-        );
-        
+            );
+        } else
+            return (
+                <div></div>
+            );
     }
 }
 
