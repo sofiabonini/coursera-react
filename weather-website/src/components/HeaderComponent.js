@@ -3,7 +3,6 @@ import { Navbar, NavbarBrand, Nav, NavbarToggler, Collapse, NavItem,
     Button, Modal, ModalHeader, ModalBody,
     Form, FormGroup, Input, Label } from 'reactstrap';
 import { baseUrl } from '../shared/baseUrl';
-import { NavLink } from 'react-router-dom';
 
 class Header extends Component {
     constructor(props) {

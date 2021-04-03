@@ -10,7 +10,7 @@ export const ConfigureStore = () => {
         combineReducers({
             weather: Weather,
             ...createForms({
-                feedback: InitialFeedback
+                update: InitialFeedback
             })
         }),
         applyMiddleware(thunk, logger)

@@ -38,20 +38,14 @@ export const addWeather = (weather) => ({
     payload: weather
 });
 
-export const postFeedback = (firstname, lastname, telnum, email, agree, contactType, message) => (dispatch) => {
+export const postFeedback = (location) => (dispatch) => {
 
     const newFeedback = {
-        firstname: firstname,
-        lastname: lastname,
-        telnum: telnum,
-        email: email,
-        agree: agree,
-        contactType: contactType,
-        message: message,
+        location: location
     }
     newFeedback.date = new Date().toISOString();
 
-    return fetch(baseUrl + 'feedback', {
+    return fetch(baseUrl + 'update', {
         method: 'POST',
         body: JSON.stringify(newFeedback),
         headers: {
@@ -74,5 +68,5 @@ export const postFeedback = (firstname, lastname, telnum, email, agree, contactT
         })
         .then(response => response.json())
         .then(response => alert(JSON.stringify(response)))
-        .catch(error => {console.log('Post Comments', error.message); alert('Comment could not be posted\nError' + error.message);});
+        .catch(error => {console.log('Update Location', error.message); alert('Location could not be updated\n' + error.message);});
 }
